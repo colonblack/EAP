@@ -1,0 +1,987 @@
+/* ========================================
+   Design tokens and global settings
+   ======================================== */
+:root {
+  --ink: #10283d;
+  --green: #0e527d;
+  --green-2: #082f4d;
+  --cream: #f6f1e7;
+  --paper: #fffdf8;
+  --gold: #d6a84d;
+  --sage: #9fb5a8;
+  --line: rgba(24, 35, 30, .16);
+  font-family: "DM Sans", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  font-synthesis: none
+}
+
+/* Base and reset styles */
+* {
+  box-sizing: border-box
+}
+
+html {
+  scroll-behavior: smooth
+}
+
+body {
+  margin: 0;
+  background: var(--paper)
+}
+
+a {
+  color: inherit;
+  text-decoration: none
+}
+
+button, input, select, textarea {
+  font: inherit
+}
+
+/* Accessibility */
+.skip-link {
+  position: fixed;
+  z-index: 99;
+  left: 1rem;
+  top: -5rem;
+  padding: .8rem 1rem;
+  background: white
+}
+
+.skip-link:focus {
+  top: 1rem
+}
+
+/* ========================================
+   Header and navigation
+   ======================================== */
+.site-header {
+  height: 92px;
+  padding: 0 clamp(1.2rem, 5vw, 5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 20;
+  width: 100%;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, .18)
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .8rem
+}
+
+.brand-mark {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: "Playfair Display";
+  font-size: .85rem
+}
+
+.brand-dove {
+  position: absolute;
+  margin-top: -39px;
+  margin-left: 22px;
+  font-size: .72rem;
+  filter: grayscale(1) brightness(2);
+}
+
+.brand-letters {
+  font-family: "Playfair Display";
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: -.08em;
+}
+
+.brand strong, .brand small {
+  display: block;
+  line-height: 1.05
+}
+
+.brand strong {
+  font-family: "Playfair Display";
+  font-size: 1.1rem
+}
+
+.brand small {
+  font-size: .7rem;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  margin-top: .3rem
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: .85rem
+}
+
+.site-header nav>a {
+  opacity: .82;
+  transition: .2s
+}
+
+.site-header nav>a:hover {
+  opacity: 1
+}
+
+.nav-cta {
+  padding: .7rem 1rem;
+  border: 1px solid rgba(255, 255, 255, .5)
+}
+
+.language-switcher {
+  display: flex;
+  gap: .3rem;
+  align-items: center
+}
+
+.lang {
+  border: 0;
+  background: none;
+  color: white;
+  padding: .25rem;
+  opacity: .55;
+  cursor: pointer;
+  font-size: .78rem
+}
+
+.lang.active {
+  opacity: 1;
+  font-weight: 700
+}
+
+.menu-toggle {
+  display: none
+}
+
+/* ========================================
+   Hero section
+   ======================================== */
+.hero {
+  min-height: 790px;
+  height: 100vh;
+  background: linear-gradient(110deg, rgba(5, 38, 64, .98) 0%, rgba(8, 65, 104, .94) 56%, rgba(20, 92, 139, .8)), radial-gradient(circle at 75% 30%, #6f9fbd, transparent 35%);
+  color: white;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  align-items: center;
+  padding: 120px clamp(1.5rem, 8vw, 9rem) 100px;
+  overflow: hidden
+}
+
+.hero:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to right, transparent, black)
+}
+
+.hero-glow {
+  position: absolute;
+  width: 560px;
+  height: 560px;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 50%;
+  right: -100px;
+  top: 80px;
+  box-shadow: 0 0 0 90px rgba(255, 255, 255, .025), 0 0 0 180px rgba(255, 255, 255, .015)
+}
+
+.hero-content, .hero-side, .scripture {
+  position: relative;
+  z-index: 2
+}
+
+.eyebrow {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #d9bd80;
+  margin: 0 0 1.5rem
+}
+
+.eyebrow.dark {
+  color: #9a6c16
+}
+
+.hero h1, .section h2 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(3.5rem, 7vw, 7.6rem);
+  line-height: .91;
+  letter-spacing: -.045em;
+  margin: 0;
+  font-weight: 600
+}
+
+.hero h1 em, .section h2 em {
+  color: #d9bd80;
+  font-weight: 600
+}
+
+.hero-copy {
+  max-width: 570px;
+  font-size: 1.18rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, .74);
+  margin: 2rem 0
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem
+}
+
+.button {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1rem 1.25rem;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600
+}
+
+.button-light {
+  background: var(--cream);
+  color: var(--green)
+}
+
+.text-link {
+  font-size: .9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .45);
+  padding-bottom: .35rem
+}
+
+.hero-side {
+  border-left: 1px solid rgba(255, 255, 255, .3);
+  padding-left: 1.6rem
+}
+
+.hero-side p {
+  font-size: .67rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #d9bd80
+}
+
+.hero-side strong, .hero-side span {
+  display: block
+}
+
+.hero-side strong {
+  font-family: "Playfair Display";
+  font-size: 2.1rem;
+  margin: .8rem 0 .2rem
+}
+
+.hero-side span {
+  font-size: .83rem;
+  opacity: .65
+}
+
+.hero-side a {
+  display: inline-block;
+  margin-top: 1.8rem;
+  font-size: .8rem
+}
+
+.scripture {
+  position: absolute;
+  bottom: 2rem;
+  left: clamp(1.5rem, 8vw, 9rem);
+  font-family: "Playfair Display";
+  font-style: italic;
+  font-size: .88rem;
+  color: rgba(255, 255, 255, .5)
+}
+
+/* ========================================
+   Shared section layout
+   ======================================== */
+.section {
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) minmax(0, 5fr);
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 7vw, 7rem);
+  gap: 4vw
+}
+
+.section-label {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  font-size: .65rem;
+  letter-spacing: .16em;
+  text-transform: uppercase
+}
+
+.section-label span {
+  color: #a47b2b
+}
+
+.section-label p {
+  margin: 0;
+  writing-mode: vertical-rl
+}
+
+/* ========================================
+   About and church values section
+   ======================================== */
+.welcome {
+  background: var(--cream)
+}
+
+.welcome-content {
+  max-width: 1050px
+}
+
+.section h2 {
+  font-size: clamp(3rem, 5.6vw, 6rem);
+  color: var(--green)
+}
+
+.section h2 em {
+  color: #ad7b1d
+}
+
+.welcome-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 6vw;
+  margin: 3rem 0 5rem;
+  line-height: 1.8;
+  color: #59625d
+}
+
+.welcome-grid .lead {
+  font-family: "Playfair Display";
+  font-size: 1.45rem;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0
+}
+
+.foundation {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  margin: 0 0 4rem;
+  padding: 2rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, .45);
+}
+
+.foundation-dove {
+  font-size: 2rem;
+  filter: grayscale(1);
+}
+
+.foundation p {
+  margin: 0 0 .7rem;
+  color: #9a6c16;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.foundation q {
+  display: block;
+  font-family: "Playfair Display";
+  font-size: clamp(1.3rem, 2vw, 2rem);
+  line-height: 1.4;
+}
+
+.foundation cite {
+  display: block;
+  margin-top: .8rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line)
+}
+
+.values article {
+  padding: 2rem 2rem 0 0
+}
+
+.values article+article {
+  border-left: 1px solid var(--line);
+  padding-left: 2rem
+}
+
+.values span {
+  color: #a87820;
+  font-size: 1.5rem
+}
+
+.values h3 {
+  font-family: "Playfair Display";
+  font-size: 1.25rem
+}
+
+.values p {
+  color: #707974;
+  font-size: .88rem;
+  line-height: 1.6
+}
+
+/* ========================================
+   Gatherings and service schedule section
+   ======================================== */
+.gatherings {
+  background: var(--green-2);
+  color: white
+}
+
+.section-label.light {
+  color: white
+}
+
+.gatherings h2 {
+  color: white;
+  margin-bottom: 4rem
+}
+
+.gatherings .schedule-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, .17)
+}
+
+.schedule-card:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, .17)
+}
+
+.schedule-card .day {
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  color: #d9bd80;
+  display: block;
+  margin-bottom: .7rem
+}
+
+.schedule-card strong {
+  font-family: "Playfair Display";
+  font-size: 1.6rem
+}
+
+.schedule-card p {
+  opacity: .55;
+  font-size: .85rem
+}
+
+.schedule-card .time {
+  font-size: .82rem;
+  color: #e0c484
+}
+
+/* ========================================
+   YouTube live preaching section
+   ======================================== */
+.live-section {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0b3d61, #071f35);
+  color: white;
+}
+
+.live-section::after {
+  content: "";
+  position: absolute;
+  width: 460px;
+  height: 460px;
+  right: -180px;
+  bottom: -220px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 50%;
+  box-shadow: 0 0 0 70px rgba(255, 255, 255, .025);
+}
+
+.live-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, .8fr);
+  gap: clamp(3rem, 7vw, 7rem);
+  align-items: center;
+}
+
+.live-section h2 {
+  color: white;
+}
+
+.live-copy > p:not(.eyebrow) {
+  max-width: 600px;
+  margin: 2rem 0;
+  color: rgba(255, 255, 255, .7);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.youtube-button {
+  width: max-content;
+  background: #e52d27;
+  color: white;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.youtube-button:hover {
+  transform: translateY(-2px);
+  background: #ff342d;
+}
+
+.youtube-button:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 4px;
+}
+
+.live-card {
+  position: relative;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.7rem;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(4, 20, 34, .1), rgba(4, 20, 34, .92)),
+    radial-gradient(circle at 50% 35%, #397da5, #0c304a 70%);
+  border: 1px solid rgba(255, 255, 255, .18);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .28);
+}
+
+.live-status {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem .7rem;
+  background: #e52d27;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.live-status i {
+  width: 7px;
+  height: 7px;
+  background: white;
+  border-radius: 50%;
+  animation: live-pulse 1.5s infinite;
+}
+
+.live-play {
+  width: 76px;
+  height: 76px;
+  margin: auto;
+  display: grid;
+  place-items: center;
+  padding-left: 5px;
+  background: rgba(255, 255, 255, .16);
+  border: 1px solid rgba(255, 255, 255, .5);
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
+  font-size: 1.4rem;
+}
+
+.live-card-copy small,
+.live-card-copy strong {
+  display: block;
+}
+
+.live-card-copy small {
+  margin-bottom: .5rem;
+  color: #e5c67d;
+  font-size: .67rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.live-card-copy strong {
+  font-family: "Playfair Display";
+  font-size: 1.5rem;
+}
+
+@keyframes live-pulse {
+  50% {
+    opacity: .35;
+  }
+}
+
+/* ========================================
+   Church branches section
+   ======================================== */
+.branches {
+  background: var(--paper)
+}
+
+.branches h2 {
+  margin-bottom: 4rem
+}
+
+.branch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem
+}
+
+.branch-card {
+  min-height: 360px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  position: relative;
+  overflow: hidden
+}
+
+.branch-card:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(14, 44, 34, .55), rgba(14, 44, 34, .96))
+}
+
+.branch-kin {
+  background: linear-gradient(130deg, #6f99b6, #0b507c)
+}
+
+.branch-mwe {
+  background: linear-gradient(130deg, #b4955e, #174b6c)
+}
+
+.branch-address {
+  max-width: 460px;
+  line-height: 1.6;
+}
+
+.branch-card:after {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 50%;
+  right: -80px;
+  top: -80px
+}
+
+.branch-number, .branch-info {
+  position: relative;
+  z-index: 1
+}
+
+.branch-number {
+  font-size: .7rem;
+  letter-spacing: .15em
+}
+
+.branch-info p {
+  color: #e2c888;
+  text-transform: uppercase;
+  font-size: .65rem;
+  letter-spacing: .18em
+}
+
+.branch-info h3 {
+  font-family: "Playfair Display";
+  font-size: 2.8rem;
+  margin: .4rem 0
+}
+
+.branch-info span {
+  display: block;
+  opacity: .6;
+  font-size: .8rem
+}
+
+.branch-info a {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding-bottom: .4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .5);
+  font-size: .83rem
+}
+
+/* ========================================
+   Contact section and form
+   ======================================== */
+.contact {
+  background: #c9973b;
+  color: #14271e;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 8vw
+}
+
+.contact h2 {
+  color: #14271e
+}
+
+.contact h2 em {
+  color: white
+}
+
+.contact-copy>p:last-child {
+  line-height: 1.8;
+  max-width: 480px
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem
+}
+
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .09em
+}
+
+.contact-form label:nth-child(4) {
+  grid-column: 1/-1
+}
+
+.contact-form input, .contact-form select, .contact-form textarea {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(20, 39, 30, .45);
+  padding: .8rem 0;
+  outline: none;
+  border-radius: 0
+}
+
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
+  border-color: white
+}
+
+.button-gold {
+  background: var(--green-2);
+  color: white;
+  grid-column: 1/-1;
+  margin-top: .5rem
+}
+
+.form-status {
+  grid-column: 1/-1;
+  margin: 0;
+  font-size: .85rem
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+footer {
+  background: #0b241b;
+  color: white;
+  padding: 4rem clamp(1.5rem, 7vw, 7rem);
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 3rem;
+  align-items: center;
+  font-size: .8rem
+}
+
+footer>p {
+  opacity: .55
+}
+
+.footer-brand {
+  opacity: 1
+}
+
+.copyright {
+  grid-column: 1/-1;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, .14)
+}
+
+/* Scroll reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s ease, transform .7s ease
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none
+}
+
+/* ========================================
+   Responsive layout: tablets
+   ======================================== */
+@media (max-width:900px) {
+  .site-header {
+    height: 76px
+  }
+
+  .menu-toggle {
+    display: grid;
+    gap: 6px;
+    border: 0;
+    background: none;
+    padding: 10px;
+    z-index: 2
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: white
+  }
+
+  .site-header nav {
+    display: none;
+    position: absolute;
+    inset: 76px 0 auto;
+    background: #0e2c22;
+    padding: 2rem;
+    flex-direction: column;
+    align-items: flex-start
+  }
+
+  .site-header nav.open {
+    display: flex
+  }
+
+  .language-switcher {
+    margin-top: .5rem
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 760px;
+    height: auto
+  }
+
+  .hero h1 {
+    font-size: clamp(3.2rem, 13vw, 5.8rem)
+  }
+
+  .hero-side {
+    display: none
+  }
+
+  .scripture {
+    right: 1.5rem
+  }
+
+  .section {
+    grid-template-columns: 1fr;
+    padding-top: 5rem
+  }
+
+  .section-label p {
+    writing-mode: horizontal-tb
+  }
+
+  .welcome-grid, .contact {
+    grid-template-columns: 1fr
+  }
+
+  .branch-grid {
+    grid-template-columns: 1fr
+  }
+
+  .live-content {
+    grid-template-columns: 1fr
+  }
+
+  .contact {
+    display: grid
+  }
+
+  .contact-form {
+    margin-top: 1rem
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+    gap: 1rem
+  }
+
+}
+
+/* Responsive layout: mobile phones */
+@media (max-width:580px) {
+  .brand strong {
+    font-size: .9rem
+  }
+
+  .brand small {
+    font-size: .6rem
+  }
+
+  .hero {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem
+  }
+
+  .hero-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.2rem
+  }
+
+  .scripture {
+    display: none
+  }
+
+  .values {
+    grid-template-columns: 1fr
+  }
+
+  .values article+article {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding-left: 0
+  }
+
+  .gatherings .schedule-card {
+    grid-template-columns: 1fr;
+    gap: 1rem
+  }
+
+  .contact-form {
+    grid-template-columns: 1fr
+  }
+
+  .contact-form label, .contact-form label:nth-child(4) {
+    grid-column: 1
+  }
+
+  .section h2 {
+    font-size: 3.2rem
+  }
+
+}
